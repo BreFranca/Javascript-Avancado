@@ -31,7 +31,7 @@ function setList(list) {
 					<td scope="row">'+ formatDesc(list[key].desc) +'</td>\
 					<td scope="row">'+ list[key].amount +'</td>\
 					<td scope="row">'+ formatValue(list[key].value) +'</td>\
-					<td scope="row"><button onClick="setUpdate('+key+');" class="btn btn-warning">Edit</button> | <button class="btn btn-danger">Delete</button></td>\
+					<td scope="row"><button onClick="setUpdate('+key+');" class="btn btn-warning">Edit</button> | <button onClick="deleteData('+key+')" class="btn btn-danger">Delete</button></td>\
 				</tr>'
 	}
 	table += '</tbody><tfoot>\
@@ -103,7 +103,20 @@ function updateData() {
 	setList(list);
 }
 
-// function saveDate()
+function deleteData(id) {
+	if (confirm("Delete this item?")) {
+		if (id === list.length - 1) {
+			list.pop();
+		}
+	} else if (id === 0) {
+		list.shift();
+	} else {
+		var arrAuxIni = list.slice(0, id);
+		var arrAuxEnd = list.slice(id + 1);
+		list = arrAuxIni.concat(arrAuxEnd);
+	}
+	setList(list);
+}
 
 
 setList(list);

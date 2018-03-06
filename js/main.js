@@ -21,7 +21,7 @@ function getTotal(list) {
 	for(var key in list) {
 		total += list[key].value * list[key].amount;
 	}
-	return total;
+	document.getElementById("totalValue").innerHTML = formatValue(total);
 }
 
 function setList(list) {
@@ -29,7 +29,7 @@ function setList(list) {
 	for(var key in list) {
 		table += '<tr>\
 					<td scope="row">'+ formatDesc(list[key].desc) +'</td>\
-					<td scope="row">'+ list[key].amount +'</td>\
+					<td scope="row">'+ formatAmount(list[key].amount) +'</td>\
 					<td scope="row">'+ formatValue(list[key].value) +'</td>\
 					<td scope="row"><button onClick="setUpdate('+key+');" class="btn btn-warning">Edit</button> | <button onClick="deleteData('+key+')" class="btn btn-danger">Delete</button></td>\
 				</tr>'
@@ -43,12 +43,17 @@ function setList(list) {
 				</tr>\
 			</tfoot>';
 	document.getElementById('listTable').innerHTML = table;
+	getTotal(list)
 }
 
 function formatDesc(desc) {
 	var str = desc.toLowerCase();
 	str = str.charAt(0).toUpperCase() + str.slice(1);
 	return str;
+}
+
+function formatAmount(amount) {
+	return parseInt(amount);
 }
 
 function formatValue(value) {
@@ -59,6 +64,9 @@ function formatValue(value) {
 }
 
 function addData() {
+	if (!validation()) {
+		return;
+	}
 	var desc = document.getElementById('desc').value;
 	var amount = document.getElementById('amount').value;
 	var value = document.getElementById('value').value;
@@ -89,9 +97,13 @@ function resetForm() {
 	document.getElementById('btnAdd').style.display = 'inline-block';
 
 	document.getElementById('inputIdUpdate').innerHTML = '';
+	document.getElementById("errors").style.display = "none";
 }
 
 function updateData() {
+	if (!validation()) {
+		return;
+	}
 	var id = document.getElementById('idUpdate').value;
 
 	var desc = document.getElementById('desc').value;
@@ -118,6 +130,34 @@ function deleteData(id) {
 	setList(list);
 }
 
+function validation() {
+	var desc = document.getElementById('desc').value;
+	var amount = document.getElementById('amount').value;
+	var value = document.getElementById('value').value;
+
+	var errors = '';
+	if (desc === '') {
+		errors += '<p>Fill out description</p>';
+	}
+	if (amount === '') {
+		errors += '<p>Fill out quantity</p>';
+	} else if(amount != parseInt(amount)) {
+		errors += '<p>Fill out a valid quantity</p>';
+	}
+	if (value === '') {
+		errors += '<p>Fill out quantity</p>';
+	} else if(value != parseFloat(value)) {
+		errors += '<p>Fill out a valid quantity</p>';
+	}
+
+	if (errors != '') {
+		document.getElementById("errors").style.display = "block";
+		document.getElementById("errors").innerHTML = "<h3>Error:</h3>" + errors;
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
 
 setList(list);
-console.log(getTotal(list));

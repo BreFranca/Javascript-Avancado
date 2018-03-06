@@ -22,16 +22,27 @@
 			<div class="form-group">
 				<input type="text" class="form-control" id="value" placeholder="Value">
 			</div>
-			<span id="btnUpdate" style="display: none;">
-				<span id="inputIdUpdate"></span>
-				<button onClick="updateData(); " class="btn btn-outline-success">Save</button>
-				<button onClick="resetForm(); " class="btn btn-outline-danger">Cancel</button>
-			</span>
-			<button id="btnAdd" onClick="addData(); " class="btn btn-outline-primary">Add</button>
+			<div class="form-group">
+				<span id="btnUpdate" style="display: none;">
+					<span id="inputIdUpdate"></span>
+					<button onClick="updateData(); " class="btn btn-outline-success">Save</button>
+					<button onClick="resetForm(); " class="btn btn-outline-danger">Cancel</button>
+				</span>
+				<button id="btnAdd" onClick="addData(); " class="btn btn-outline-primary">Add</button>
+			</div>
 		</div>
+		<span id="errors"></span>
 		<table id="listTable" class="table">
+
 		</table>
 	</div>
+	<nav class="navbar fixed-bottom navbar-light bg-light">
+		<div class="container-fluid justify-content-center">
+			<div class="row">
+				<h4 class="text-success">Total: <span id="totalValue">0,00</span></h4>
+			</div>
+		</div>
+	</nav>
 	<script src="js/config.js"></script>
 	<script src="js/main.js"></script>
 </body>

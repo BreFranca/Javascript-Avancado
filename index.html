@@ -28,7 +28,11 @@
 					<button onClick="updateData(); " class="btn btn-outline-success">Save</button>
 					<button onClick="resetForm(); " class="btn btn-outline-danger">Cancel</button>
 				</span>
-				<button id="btnAdd" onClick="addData(); " class="btn btn-outline-primary">Add</button>
+				<span id="btnAdd">
+					<button onClick="addData(); " class="btn btn-outline-primary">Add</button>
+					<button onClick="resetForm(); " class="btn btn-outline-secondary">Reset</button>
+					<button onClick="deleteList(); " class="btn btn-outline-danger">Delete List</button>
+				</span>
 			</div>
 		</div>
 		<span id="errors"></span>

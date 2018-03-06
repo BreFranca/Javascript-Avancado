@@ -107,14 +107,14 @@ function deleteData(id) {
 	if (confirm("Delete this item?")) {
 		if (id === list.length - 1) {
 			list.pop();
+		} else if (id === 0) {
+			list.shift();
+		} else {
+			var arrAuxIni = list.slice(0, id);
+			var arrAuxEnd = list.slice(id + 1);
+			list = arrAuxIni.concat(arrAuxEnd);
 		}
-	} else if (id === 0) {
-		list.shift();
-	} else {
-		var arrAuxIni = list.slice(0, id);
-		var arrAuxEnd = list.slice(id + 1);
-		list = arrAuxIni.concat(arrAuxEnd);
-	}
+	} 
 	setList(list);
 }
 
